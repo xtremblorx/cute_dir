@@ -33,3 +33,4 @@ for /f "skip=4 delims=" %%a in ('dir %PARAM%') do (if !counter! GEQ !total! (got
 
 :here
 echo Files are Ready! Open log.txt on Desktop.
+PAUSE >NUL
