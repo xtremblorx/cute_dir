@@ -1,4 +1,4 @@
-# CUTE_DIR
+# cute_dir
 ##### <SUP> SAMPLE OUT:</SUP>
 ```
 <DIR>				:FRESH      					:..:
