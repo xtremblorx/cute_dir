@@ -1,4 +1,15 @@
-# cute_dir
+<SUP>938B201.0.1.BAT</sUP>
+```
+dir /o-d
+.                                       :Today:REDEEMER.bat:
+.                                       :Today:DOUBLE.bat:
+.                                       :Today:938B201.0.1.bat:
+...........
+  --Total-File(s)--->14
+Press any key to continue . . .
+```
+
+## cute_dir
 ##### <SUP> SAMPLE OUT:</SUP>
 ```
 <DIR>				:FRESH      					:..:
