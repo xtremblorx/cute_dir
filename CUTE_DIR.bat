@@ -8,7 +8,10 @@ IF NOT DEFINED SETTEST (SET PARAM=/ad)
 SET ABOM=/w /W /b /B
 for %%X in (%ABOM%) DO ( FOR /F %%A IN ('ECHO %PARAM% ^| find "%%X"') DO SET SEARCH=%%A & IF DEFINED SEARCH ( ECHO /b /w PARAMETER NOT ALLOWED. PRESS A KEY TO START A NEW& PAUSE & START CMD /c CUTE_DIR.BAT & EXIT ) )
 COLOR 8
-FOR /L %%i in (1,1,15) DO echo Writing to Log File "%homedrive%\Users\%username%\Desktop\log.txt" in 15^(%%i^) Sec..^(^( CLOSE TO AVOID ^)^) & TIMEOUT 1 >NUL & CLS
+echo press enter to continue..
+set /p save_file=
+IF NOT DEFINED save_file (set save_file=log.txt)
+FOR /L %%i in (1,1,15) DO echo Writing to Log File "%homedrive%\Users\%username%\Desktop\!save_file!" in 15^(%%i^) Sec..^(^( CLOSE TO AVOID ^)^) & TIMEOUT 1 >NUL & CLS
 
 for /f "delims=*" %%i in ('cd') DO set currentdir=%%i
 :back
@@ -29,7 +32,7 @@ set /a counter=0
 for /f "delims=" %%a in ('dir %PARAM%') do set /a counter+=1
 set /a total=counter-5
 set /a counter=0
-for /f "skip=4 delims=" %%a in ('dir %PARAM%') do (if !counter! GEQ !total! (goto here)) & set /a counter+=1 &  for /f "tokens=1,2,3,4 delims= " %%b in ("%%a") do set dt=%%b & echo. & (set filename=%%a& set filename=!filename:~%INDEX%,200!)&(if "%%e"=="<DIR>" (set /a DIR=0) else (set /a DIR=1))&powershell -c "$str = (Get-date).Tostring('%str%');$number = (Get-date $str)-(Get-date !dt!);$number = $number.Days;$dir = '!dir!';if ($dir -eq 0) {write-host -NoNewline '<DIR>'};if ($number -gt 7) { write-host -NoNewline \"`t`t`t`t: $number Day Old\" } else { Write-Host -NoNewline \"`t`t`t`t:FRESH      \" };write-host  \"`t`t`t`t`t:!filename!:\" " >>"%homedrive%\Users\%username%\Desktop\log.txt"  & echo Echoing File (!counter!) of !total!
+for /f "skip=4 delims=" %%a in ('dir %PARAM%') do (if !counter! GEQ !total! (goto here)) & set /a counter+=1 &  for /f "tokens=1,2,3,4 delims= " %%b in ("%%a") do set dt=%%b & echo. & (set filename=%%a& set filename=!filename:~%INDEX%,200!)&(if "%%e"=="<DIR>" (set /a DIR=0) else (set /a DIR=1))&powershell -c "$str = (Get-date).Tostring('%str%');$number = (Get-date $str)-(Get-date !dt!);$number = $number.Days;$dir = '!dir!';if ($dir -eq 0) {write-host -NoNewline '<DIR>'};if ($number -gt 7) { write-host -NoNewline \"`t`t`t`t: $number Day Old\" } else { Write-Host -NoNewline \"`t`t`t`t:FRESH      \" };write-host  \"`t`t`t`t`t:!filename!:\" " >>"%homedrive%\Users\%username%\Desktop\!save_file!"  & echo Echoing File (!counter!) of !total!
 
 :here
 echo Files are Ready! Open log.txt on Desktop.
