@@ -9,8 +9,12 @@ SET ABOM=/w /W /b /B
 for %%X in (%ABOM%) DO ( FOR /F %%A IN ('ECHO %PARAM% ^| find "%%X"') DO SET SEARCH=%%A & IF DEFINED SEARCH ( ECHO /b /w PARAMETER NOT ALLOWED. PRESS A KEY TO START A NEW& PAUSE & START CMD /c CUTE_DIR.BAT & EXIT ) )
 COLOR 8
 echo press enter to continue..
+choice /c fx /d x /t 1 >nul
+set error=%errorlevel%
+if %error%==2 ( goto x )
 set /p save_file=
 IF NOT DEFINED save_file (set save_file=log.txt)
+:x
 FOR /L %%i in (1,1,15) DO echo Writing to Log File "%homedrive%\Users\%username%\Desktop\!save_file!" in 15^(%%i^) Sec..^(^( CLOSE TO AVOID ^)^) & TIMEOUT 1 >NUL & CLS
 
 for /f "delims=*" %%i in ('cd') DO set currentdir=%%i
